@@ -1,5 +1,11 @@
+import model.Dado;
+import model.SectorDados;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * This class is used for ...
@@ -20,7 +26,7 @@ public class GUI extends JFrame {
             + "\n42 es cara que permite sumar puntos al final de la ronda."
             +"\nEste juego lo jugará un único jugador y ganará si logra sumar 30 puntos en 5 rondas consecutivas de juego.";
 
-    private JButton lanzar,ayuda,salir,dado1,dado2,dado3,dado4,dado5,dado6,dado7,dado8,dado9,dado10;
+    private JButton lanzar,ayuda,salir,dados;
     private JPanel panelDadosActivos,panelDadosInactivos,panelTarjetaPuntuacion,panelDadosUtilizados;
     private ImageIcon imageDados,imagePuntuacion;
     private JTextArea mensajesSalida,resultadosDados;
@@ -35,10 +41,7 @@ public class GUI extends JFrame {
 
         //Default JFrame configuration
         this.setTitle("Geek Out Masters");
-        //this.setSize(200,100);
-        //this.setUndecorated(true);
-        this.setBackground(new Color(0,0,255,255));
-        this.setForeground(new Color(0,0,255));
+        this.setUndecorated(true);
         this.pack();
         this.setResizable(true);
         this.setVisible(true);
@@ -55,6 +58,8 @@ public class GUI extends JFrame {
         this.getContentPane().setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         //Create Listener Object and Control Object
+        escucha= new Escucha();
+
         //Set up JComponents
         headerProject = new Header("Geek Out Masters", Color.BLACK);
         constraints.gridx=0;
@@ -66,7 +71,7 @@ public class GUI extends JFrame {
 
         ayuda = new JButton(" ? ");
 
-        //ayuda.addActionListener(escucha);
+        ayuda.addActionListener(escucha);
         constraints.gridx=0;
         constraints.gridy=1;
         constraints.gridwidth=1;
@@ -75,7 +80,7 @@ public class GUI extends JFrame {
         this.add(ayuda,constraints);
 
         salir = new JButton("Salir");
-        //salir.addActionListener(escucha);
+        salir.addActionListener(escucha);
         constraints.gridx=1;
         constraints.gridy=1;
         constraints.gridwidth=1;
@@ -86,8 +91,7 @@ public class GUI extends JFrame {
         panelDadosActivos = new JPanel();
         panelDadosActivos.setPreferredSize(new Dimension(300,180));
         panelDadosActivos.setBorder(BorderFactory.createTitledBorder("Dados Activos"));
-        //panelDadosActivos.add(dado1);
-        //panelDadosActivos.add(dado2);
+        //panelDadosActivos.add(dados);
         constraints.gridx=0;
         constraints.gridy=2;
         constraints.gridwidth=1;
@@ -132,7 +136,7 @@ public class GUI extends JFrame {
         add(panelDadosUtilizados  ,constraints);
 
         lanzar = new JButton("lanzar");
-        //lanzar.addActionListener(escucha);
+        lanzar.addActionListener(escucha);
 
         constraints.gridx=0;
         constraints.gridy=3;
@@ -156,7 +160,37 @@ public class GUI extends JFrame {
     /**
      * inner class that extends an Adapter Class or implements Listeners used by GUI class
      */
-    private class Escucha {
+    private class Escucha implements ActionListener {
 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource()==lanzar){
+                SectorDados sectorA;
+                SectorDados sectorI;
+                //modelCraps.calcularTiro();
+                sectorA = new SectorDados("Dados activos", 7);
+                System.out.println("Sector: " + sectorA.getNombre());
+                for (int i = 0; i < sectorA.getDados().size(); i++) {
+                    imageDados= new ImageIcon("Dado" + (i + 1) + ": " + sectorA.getDados().get(i).getCaraSup() + ","
+                            + sectorA.getDados().get(i).getCaraInf());
+                    dados.setIcon(imageDados);
+                }
+                //imageDados = new ImageIcon(getClass().getResource("/resources/"+dados<Dado>+".png"));
+                //dados.setIcon(imageDados);
+
+                //imageDado = new ImageIcon(getClass().getResource("/resources/"+caras[1]+".png"));
+                //dado2.setIcon(imageDado);
+                //modelCraps.determinarJuego();
+                //resultadosDados.setText(modelCraps.getEstadoToString()[0]);
+                //mensajesSalida.setText(modelCraps.getEstadoToString()[1]);
+            }else{
+                if(e.getSource()==ayuda){
+                    JOptionPane.showMessageDialog(null,MENSAJE_INICIO);
+                }else{
+                    System.exit(0);
+                }
+            }
+
+        }
     }
 }
