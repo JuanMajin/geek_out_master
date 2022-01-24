@@ -24,10 +24,18 @@ public class SectorDados {
         return nombre;
     }
 
-    public SectorDados moverDado(Dado dado, SectorDados sectorActual, SectorDados sectorFinal) {
+    public void imprimirDados() {
+        System.out.println(nombre);
+        for (int i = 0; i < dados.size(); i++) {
+            System.out.print(dados.get(i).getCaraSup());
+            System.out.print(dados.get(i).getCaraInf() + " ");
+        }
+        System.out.println();
+    }
+
+    public void moverDado(Dado dado, SectorDados sectorActual, SectorDados sectorFinal) {
         sectorActual.getDados().remove(dado);
         sectorFinal.getDados().add(dado);
-        return sectorFinal;
     }
 
     public void setDados(ArrayList<Dado> dados) {

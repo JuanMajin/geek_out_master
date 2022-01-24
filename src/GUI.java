@@ -31,7 +31,6 @@ public class GUI extends JFrame {
     private ImageIcon imageDados,imagePuntuacion;
     private JTextArea mensajesSalida,resultadosDados;
     private Escucha escucha;
-    //private ModelJuego modelJuego;
     private Header headerProject;
 
     /**

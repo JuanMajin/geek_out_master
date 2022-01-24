@@ -26,8 +26,8 @@ public class Dado {
         caraInf = temp;
     }
 
-    public Dado lanzarDado() {
-        return new Dado();
+    public void relanzarDado() {
+        setCaras(random.nextInt(6) + 1);
     }
 
     public void setCaraInf(String caraInf) {
