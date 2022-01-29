@@ -2,14 +2,35 @@ package model;
 
 import java.util.Random;
 
+/**
+ * Class Dado generate a Random value between 1 and 6
+ * Se establecen las caras superiores e inferiores
+ * @autor Juan-J Majin-M juan.majin@correounivalle.edu.co
+ * @author Diana Cadena diana.marcela.cadena@correounivalle.edu.co
+ * @version v.1.0.0 date:11/01/2022
+ */
+
 public class Dado {
 
     private static Random random = new Random();
     private String caraSup;
     private String caraInf;
+    private String id;
 
-    public Dado() {
+    /**
+     * Se generan las caras de forma aleatoria
+     */
+    public Dado(String id) {
         setCaras(random.nextInt(6) + 1);
+        this.id=id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCaraInf() {
@@ -20,11 +41,20 @@ public class Dado {
         return caraSup;
     }
 
+
+
+    /**
+     * Permite invirtir Cara
+     */
     public void invertirCara() {
         String temp = caraSup;
         caraSup = caraInf;
         caraInf = temp;
     }
+
+    /**
+     * Permite relanzar Dado
+     */
 
     public void relanzarDado() {
         setCaras(random.nextInt(6) + 1);
@@ -34,6 +64,10 @@ public class Dado {
         this.caraInf = caraInf;
     }
 
+    /**
+     * Establece las caras superiores e inferiores
+     * @param n
+     */
     public void setCaras(int n) {
         if (n == 1) {
             caraSup = "M";
@@ -62,5 +96,4 @@ public class Dado {
     public void setCaraSup(String caraSup) {
         this.caraSup = caraSup;
     }
-
 }
